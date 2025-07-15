@@ -67,6 +67,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.google.code.gson:gson:2.13.1")
+
     implementation("io.coil-kt:coil-compose:2.7.0")
 
     val hiltVersion = "2.50"
