@@ -1,6 +1,8 @@
 package com.jasper.mycakeapp.di
 
 import com.jasper.mycakeapp.data.api.CakeApi
+import com.jasper.mycakeapp.data.repository.CakeRepository
+import com.jasper.mycakeapp.data.repository.CakeRepositoryImpl
 import com.jasper.mycakeapp.util.CAKE_API_BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -17,7 +19,7 @@ object CakeAppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitInstance(okHttpClient: OkHttpClient) : Retrofit{
+    fun provideRetrofitInstance(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(CAKE_API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -27,7 +29,14 @@ object CakeAppModule {
 
     @Provides
     @Singleton
-    fun provideCakeApiInstance(retrofit: Retrofit) : CakeApi {
+    fun provideCakeApiInstance(retrofit: Retrofit): CakeApi {
         return retrofit.create(CakeApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideCakeRepository(cakeApi: CakeApi): CakeRepository {
+        return CakeRepositoryImpl(cakeApi)
+    }
+
 }
