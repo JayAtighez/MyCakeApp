@@ -3,6 +3,7 @@ package com.jasper.mycakeapp.di
 import com.jasper.mycakeapp.data.api.CakeApi
 import com.jasper.mycakeapp.data.repository.CakeRepository
 import com.jasper.mycakeapp.data.repository.CakeRepositoryImpl
+import com.jasper.mycakeapp.usecase.GetCakesUseCase
 import com.jasper.mycakeapp.util.CAKE_API_BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -38,5 +39,12 @@ object CakeAppModule {
     fun provideCakeRepository(cakeApi: CakeApi): CakeRepository {
         return CakeRepositoryImpl(cakeApi)
     }
+
+    @Provides
+    @Singleton
+    fun provideGetCakesUseCase(repository: CakeRepository) : GetCakesUseCase{
+        return GetCakesUseCase(repository)
+    }
+
 
 }
